@@ -61,7 +61,9 @@ if uploaded_file:
         st.success("No dark web activity detected!")
     
     # Predict using ML model
-    input_data = np.array([len(extracted_ips)]).reshape(1, -1)
+    # Ensure input shape matches what the model was trained on
+    input_data = np.array([[len(extracted_ips)]])  # Double brackets to create a 2D array
+
     prediction = model.predict(input_data)[0]
     
     st.subheader("🔍 ML Prediction:")
